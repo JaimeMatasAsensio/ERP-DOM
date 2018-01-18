@@ -228,6 +228,16 @@ function Shop(cif,nombre,direccion,telefono,coords)
 
 
   }
+  this.getCategory = function(IdCat){
+    var i = _category.findIndex(function(element){
+      return (element.IdCategory === IdCat)
+    });
+    if(i != -1){
+      return _category[i];
+    }else{
+      throw new CategoryNotExistInShop(IdCat,_nombre);
+    }
+  }
 
   //Iterador del array de categorias
   Object.defineProperty(this,"categoryIte",{
@@ -347,5 +357,5 @@ function Shop(cif,nombre,direccion,telefono,coords)
 Shop.prototype = {};
 Shop.prototype.constructor = Shop;
 Shop.prototype.toString = function(){
-  return "SN: "+this.cif+". Nombre: "+this.name+". Direccion: "+this.direccion+". Telefono: "+this.telefono+". Coordenadas: ("+this.coords.toString()+") "
+  return "SN: "+this.cif+". Nombre: "+this.nombre+". Direccion: "+this.direccion+". Telefono: "+this.telefono+". Coordenadas: ("+this.coords.toString()+") "
 }

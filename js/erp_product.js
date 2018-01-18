@@ -253,6 +253,56 @@ InvalidValueForIVA.prototype.toString = function(){
     return Product.prototype.toString.call(this) + ". Cpu: "+this.cpu+". Marca: "+this.marca+". Memoria: "+this.memoria;
   }
 
+  //- Objeto VideoConsola
+
+  function VideoConsola(SN,nombre,descripcion,IVA,precio,imagenes,marca,numJugadores,portatil){
+    //Comprobacion de crecion de Instancia
+    if(!(this instanceof VideoConsola)) throw new ConstructorCalledFunction();
+    //Desbloqueo del Objeto Abstracto
+    Lock = false;
+    Product.call(this,SN,nombre,descripcion,IVA,precio,imagenes);
+    Lock = true;
+
+    //Validacion de parametros
+    if(!marca) throw new UndefinedParameter("marca");
+    if(!portatil) throw new UndefinedParameter("modelo");
+    if(!numJugadores) throw new UndefinedParameter("memoria");
+
+    //Parametros privados
+    var _marca = marca;
+    var _numJugadores = numJugadores;
+    var _portatil = portatil;
+
+    //Getters & Setters
+    Object.defineProperty(this,"marca",{
+      get: function(){return _marca},
+      set: function(newMarca){
+        if(newMarca) throw new UndefinedParameter("marca");
+        _marca = newMarca;
+      }
+    });
+    Object.defineProperty(this,"numJugadores",{
+      get: function(){return _numJugadores},
+      set: function(newnumJugadores){
+        if(newnumJugadores) throw new UndefinedParameter("numJugadores");
+        _numJugadores = newnumJugadores;
+      }
+    });
+    Object.defineProperty(this,"portatil",{
+      get: function(){return _portatil},
+      set: function(newportatil){
+        if(newportatil) throw new UndefinedParameter("portatil");
+        _portatil = newportatil;
+      }
+    });
+    
+    //Metodos Publicos.. No tiene por ahora
+  }
+  VideoConsola.prototype = Object.create(Product.prototype);
+  VideoConsola.prototype.constructor = VideoConsola;
+  VideoConsola.prototype.toString = function(){
+    return Product.prototype.toString.call(this) + ". Marca: "+this.marca+". Numero de Jugadores: "+this.numJugadores+". Portatil: "+this.portatil;
+  }
   //- Objeto Camara
   function Camara(SN,nombre,descripcion,IVA,precio,imagenes,marca,lente,memoria)
   /*Constructor de objetos Camara */
@@ -308,9 +358,11 @@ InvalidValueForIVA.prototype.toString = function(){
   Lock = true;
 
   //Devolver los constructores
+
   window.Product = Product;
   window.Movil = Movil;
   window.Ordenador = Ordenador;
+  window.VideoConsola = VideoConsola;
   window.Camara = Camara;
 
 })();
