@@ -86,11 +86,67 @@ function init(){
   shop3.AddProduct(pro5,4,3);
   shop3.AddProduct(pro6,8,3);
 
+  /*//Iterador de productos de la tienda 3 mostrando la categoria de cada producto
   var iteShop3 = shop3.stockIte;
   var item = iteShop3.next();
   while(!item.done){
     console.log(item.value.producto.toString()+". Unidades: "+item.value.cantidad+". Categoria: "+shop3.getCategory(item.value.categoriaId).toString());
     item = iteShop3.next();
   }
+  */
+
+  var Store = StoreHouse.getInstance("ManchaStore");
+  /*//Nombre del StoreHouse
+  console.log("");
+  console.log("Nombre del Store House: "+Store.nombre);
+  */
+
+  Store.AddCategory(cat1);
+  Store.AddCategory(cat2);
+  Store.AddCategory(cat3);
+
+  /*//Iterador de categorias almacenadas en Store
+  var iteStoreCat = Store.categoryIte;
+  var item = iteStoreCat.next();
+  while(!item.done){
+    console.log(item.value.toString());
+    item = iteStoreCat.next();
+  }
+  */
+  Store.AddProduct(pro1,10,1);
+  Store.AddProduct(pro2,5,1);
+  Store.AddProduct(pro3,6,2);
+  Store.AddProduct(pro4,3,2);
+  Store.AddProduct(pro5,3,3);
+  Store.AddProduct(pro6,8,3);
+
+  /*//Iterador de productos almacenados en StoreHouse con su categoria
+  var itemStore = Store.stockIte;
+  var item = itemStore.next();
+  while(!item.done){
+    console.log("");
+    console.log(item.value.producto.toString()+". Cantidad: "+item.value.cantidad+". Categoria: "+Store.getCategory(item.value.categoriaId).titulo);
+    item = itemStore.next();
+  }
+  */
+
+  Store.AddShop(shop1);
+  Store.AddShop(shop2);
+  Store.AddShop(shop3);
+
+  /*//iterador de las tiendas y de los productos de cada tienda;
+  var iteStoreShops = Store.shopIte;
+  var shop = iteStoreShops.next();
+  while(!shop.done){
+    console.log("Stock de la Tienda: "+shop.value.nombre);
+    var iteShop = shop.value.stockIte;
+    var item = iteShop.next();
+    while(!item.done){
+      console.log(item.value.producto.toString()+". Cantidad: " + item.value.cantidad + ". Categoria: " + shop.value.getCategory(item.value.categoriaId).titulo);
+      item = iteShop.next();
+    }
+    console.log("")
+    shop = iteStoreShops.next();
+  }
+  */
 }
- init();

@@ -174,6 +174,17 @@ var StoreHouse = (function(){
 
         }
 
+        this.getCategory = function(IdCat){
+          var i = _category.findIndex(function(element){
+            return (element.IdCategory === IdCat)
+          });
+          if(i != -1){
+            return _category[i];
+          }else{
+            throw new CategoryNotExistInShop(IdCat,_nombre);
+          }
+        }
+
         this.RemoveCategory = function(IdCat)
         /*Metodo para eliminar una categoria del array de categorias de la tienda, requiere el id de la categoria */
         {
