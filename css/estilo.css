@@ -54,8 +54,10 @@ main{
   background-color: rgb(192, 220, 240);
   min-height: calc(100vh - 174px);
 }
-
-
+#contRemove{
+  background-color: rgb(192, 220, 240);
+  height: 50px
+}
 /*estilos para el footer y sus elementos*/
 footer{
   text-align: center;
