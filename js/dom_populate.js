@@ -5,7 +5,10 @@ var Store = StoreHouse.getInstance();
 var IdMainCont = document.getElementById("main-cont");
 var BtnRemoveChilds = document.getElementById("removeChilds");
 BtnRemoveChilds.addEventListener("click", clearMainCont);
-function initPopulate(){
+
+function initPopulate()
+/*Funcion que inicializa la pagina cargando las tiendas que existen dentro del storehouse */
+{
 
   var divCab = document.createElement("div");
   divCab.setAttribute("id","cabecera");
@@ -67,8 +70,10 @@ function initPopulate(){
 
 }
 
-function shopPopulate(shop){
-  
+function shopPopulate(shop)
+/*Funcion para mostrar los productos de una tienda una vez se ha seleccionado una tienda en concreto */
+{
+  var tienda = shop;
   return function(){
     
     var divCab = document.createElement("div");
@@ -79,10 +84,59 @@ function shopPopulate(shop){
     var h2Cab = document.createElement("h2");
     h2Cab.setAttribute("id","titleStore");
     h2Cab.className = "col-md-12";
-    h2Cab.appendChild(document.createTextNode(shop.nombre));
+    h2Cab.appendChild(document.createTextNode(tienda.nombre));
     divCab.appendChild(h2Cab);
+    var infoTienda = document.createElement("p");
+    infoTienda.innerHTML = "Cif: "+tienda.cif;
+    IdMainCont.appendChild(infoTienda);
+    var infoTienda1 = document.createElement("p");
+    infoTienda1.innerHTML = "Direccion: "+tienda.direccion;
+    IdMainCont.appendChild(infoTienda1);
+    var infoTienda2 = document.createElement("p");
+    infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
+    IdMainCont.appendChild(infoTienda2);
   
     //Detalles de la tienda y sus productos
+
+    var divProductos = document.createElement("div");
+    divProductos.setAttribute("id","tiendas");
+    divProductos.className = "row";
+    divProductos.style.borderBottom = "1px solid black";
+    divProductos.style.borderTop = "1px solid black";
+    divProductos.style.margin = "10px 0px";
+    divProductos.style.padding = "5px 0px";
+    IdMainCont.appendChild(divProductos);
+
+    var stockShop = tienda.stockIte;
+    var item = stockShop.next();
+    while(!item.done){
+      var NomPro = document.createElement("h3");
+      NomPro.appendChild(document.createTextNode(item.value.producto.nombre));
+      divProductos.appendChild(NomPro);
+
+      var detPro = document.createElement("div");
+      detPro.className = "row";
+      detPro.borderBottom = "1px solid black";
+      divProductos.appendChild(detPro);
+
+      var divImg = document.creaateElement("div");
+      divImg.className = "col-sm-6";
+      detPro.appendChild(divImg);
+
+      var imgPro = document.createElement("img");
+      imgPro.setAttribute("src",item.value.producto.imagenes);
+      imgPro.style.width = "50%";
+      imgPro.style.height = "auto";
+      divImg.appendChild(imgPro);
+      
+      var divInfo = document.createateElement("div");
+      divImg.className = "col-sm-6";
+      
+
+
+
+      item = stockShop.next();
+    }
   
     var divAtras = document.createElement("div");
     divAtras.className = "row text-center";
@@ -95,18 +149,22 @@ function shopPopulate(shop){
     iconGalon.className = "glyphicon glyphicon-chevron-left";
     BtnAtras.appendChild(iconGalon);
     BtnAtras.appendChild(document.createTextNode("Atras"));
+    IdMainCont.appendChild(BtnAtras);
 
+    BtnAtras.addEventListener("click",clearMainCont);
     BtnAtras.addEventListener("click",initPopulate);
   };
 
 }
 
 
-function clearMainCont(){
+function clearMainCont()
+/*Funcion para limpiar el contenido de la division con id main-cont */
+{
   var allChilds = IdMainCont.children;
   console.log("Hijos del contenido inicial: " + allChilds.length)
-  for (let i = 0; i <= allChilds.length; i++) {
-    IdMainCont.removeChild(allChilds[i]);
+  while(allChilds.length > 0) {
+    IdMainCont.removeChild(allChilds[0]);
   }
 }
 

@@ -324,6 +324,10 @@ function Shop(cif,nombre,direccion,telefono,coords)
    }
 
    //Iterador de los objetos contenidos en _stock
+   /*
+    Ejemplo de un valor de _stock
+    _stock[0] = {producto:Product, cantidad:Integer, categoriaId: IdCategory}
+    */
    Object.defineProperty(this,"stockIte",{
     get: function(){
       var nextIndex = 0;

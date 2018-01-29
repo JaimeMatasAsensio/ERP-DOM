@@ -85,7 +85,7 @@ InvalidValueForIVA.prototype.toString = function(){
     var _descripcion = descripcion;
     var _IVA = IVA;
     var _precio = precio; //Todos los precios son sin iva
-    var _imagenes = [];
+    var _imagenes = imagenes;
 
     //Getters & Setters
     Object.defineProperty(this,"IdProduct",{
@@ -125,6 +125,13 @@ InvalidValueForIVA.prototype.toString = function(){
       set: function(nuevoPrecio){
         if(!(Number.isFinite(nuevoPrecio)) && (nuevoPrecio > 0)) throw new InvalidValueForPrecio(precio);
         _precio = nuevoPrecio;
+      }
+    });
+
+    Object.defineProperty(this,"imagenes",{
+      get: function(){ return _imagenes},
+      set: function(nuevaImagen){
+        _imagenes = nuevaImagen;
       }
     });
 
