@@ -322,6 +322,19 @@ function Shop(cif,nombre,direccion,telefono,coords)
     }
 
    }
+    this.getProduct = function(proId)
+    /*Metodo para remover un producto, requiere la Id del producto*/
+    {
+      var indexPro = _stock.findIndex(function(element){
+        return (element.producto.IdProduct === proId);
+      });
+      if( indexPro != -1){
+        return _stock[indexPro];
+      }else{
+        throw new ProductNotExistInShop(proId,cant);
+      }
+
+    }
 
    //Iterador de los objetos contenidos en _stock
    /*

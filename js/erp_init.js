@@ -4,7 +4,7 @@ function init(){
   var cat1 = new Category("Comunicacion","Telefonos moviles, Fijos, radios de onda corta, radios de onda larga y todo tipo de equipos relacionados con la comunicacion.");
   var cat2 = new Category("Imagen","Equipos fotograficos, grabacion de Video y todo tipo de equipos relacionados con la Imagen.");
   var cat3 = new Category("VideoConsolas","Videoconsolas fijas o portatiles, mandos y complementos.");
-  
+
   /*
   console.log(cat1.toString());
   console.log(cat2.toString());
@@ -16,7 +16,7 @@ function init(){
   var pro1 = new Movil("0001Apple","Iphone X","La ultima version de movil de la conocida marca de la manzana...",24,849.99,"../imagenes/iphoneX.jpg","Apple","50Mpx","120Gb");
   var pro2 = new Movil("0001Samsumg","Galaxy S8","El ultimo movil de la competencia de la manzana",24,799.99,"../imagenes/gs8.jpg","Samsumg","50Mpx","120Gb");
 
-  var pro3 = new Camara("0001Fuji","Fuji Reflex","Una camara para profesionales de la fotografia",18,1045,"../imagenes/fujiflim.jpg","FujiFilm","Digital","36Gb");
+  var pro3 = new Camara("0001Fuji","Fuji Reflex","Una camara para profesionales de la fotografia",18,1045,"../imagenes/fujifilm.jpg","FujiFilm","Digital","36Gb");
   var pro4 = new Camara("0001Canon","Canon Reflex","Camara Reflex para profesionales de la fotografia",18,1258,"../imagenes/canon.jpg","Canon","Digital","50Gb");
 
   var pro5 = new VideoConsola("0001Sony","Play Station 4 500Gb","Video consola de ultima generacion para amantes de los videojuegos de poca duracion",24,298,"../imagenes/ps4.jpg","Sony","6 Jugadores","No");
@@ -31,7 +31,7 @@ function init(){
   console.log(pro5.toString());
   console.log(pro6.toString());
   */
-  
+
   //Implementacion de los Objetos Coords
 
   var cor1 = new Coords(1,1);
@@ -46,7 +46,7 @@ function init(){
   */
 
   //Implementacion de los Objetos Shop
-  
+
   var shop1 = new Shop("134568","Moviles Benito","Plaza Mayor Nº2, Chillon","926202020",cor2);
   var shop2 = new Shop("134569","Camaras Pancracio","C/El Azogue Nº1, Almaden","926212121",cor1);
   var shop3 = new Shop("789469","Electro Barato","C/Calatrava Nº86, Ciudad Real","926245056",cor3);
