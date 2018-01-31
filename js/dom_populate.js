@@ -46,14 +46,7 @@ function initPopulate()
     h3Tienda.appendChild(document.createTextNode(shop.value.nombre));
     divTienda.appendChild(h3Tienda);
 
-    var catIte = shop.value.categoryIte;
-    var category = catIte.next();
-    while(!category.done){
-      var pCategory = document.createElement("p");
-      pCategory.appendChild(document.createTextNode(category.value.titulo));
-      divTienda.appendChild(pCategory);
-      category = catIte.next();
-    }
+    divTienda.appendChild(menuCategoryShopPopulate(shop.value));
 
     var BtnVerTienda = document.createElement("button");
     BtnVerTienda.setAttribute("id","showShop"+index);
@@ -91,12 +84,15 @@ function shopPopulate(shop)
     h2Cab.className = "col-md-12";
     h2Cab.appendChild(document.createTextNode(tienda.nombre));
     divCab.appendChild(h2Cab);
+
     var infoTienda = document.createElement("p");
     infoTienda.innerHTML = "Cif: "+tienda.cif;
     IdMainCont.appendChild(infoTienda);
+
     var infoTienda1 = document.createElement("p");
     infoTienda1.innerHTML = "Direccion: "+tienda.direccion;
     IdMainCont.appendChild(infoTienda1);
+
     var infoTienda2 = document.createElement("p");
     infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
     IdMainCont.appendChild(infoTienda2);
@@ -200,7 +196,9 @@ function shopPopulate(shop)
 
 }
 
-function productShopPopulate(shop,IdPro){
+function productShopPopulate(shop,IdPro)
+/*Funcion que muestra los detalles de un producto en una tienda una vez se ha seleccionado el producto en dicha tienda*/
+{
   var tienda = shop;
   var item = tienda.getProduct(IdPro);
   return function(){
@@ -326,6 +324,156 @@ function productShopPopulate(shop,IdPro){
   }
 
 }
+
+function menuCategoryShopPopulate(shop){
+
+  var menuCategory = document.createElement("ul");
+  menuCategory.className = "list-group text-center";
+  var catIte = shop.categoryIte;
+  var category = catIte.next();
+  while(!category.done){
+    var liCategory = document.createElement("li");
+    liCategory.className = "list-group-item";
+    liCategory.appendChild(document.createTextNode(category.value.titulo));
+    menuCategory.appendChild(liCategory);
+    liCategory.addEventListener("click",productCategoryShopPopulate(shop,category.value.IdCategory));
+    category = catIte.next();
+  }
+  return menuCategory;
+}
+
+function productCategoryShopPopulate(shop,IdCategory)
+/*Funcion que muestra los productos de una tienda filtrados por categoria*/
+{
+  var tienda = shop;
+  var IdCategory = IdCategory;
+  return function(){
+    clearMainCont();
+    var divCab = document.createElement("div");
+    divCab.setAttribute("id","cabecera");
+    divCab.className = "row";
+    IdMainCont.appendChild(divCab);
+
+    //Detalles de la tienda
+
+    var h2Cab = document.createElement("h2");
+    h2Cab.setAttribute("id","titleStore");
+    h2Cab.style.textDecoration = "underline";
+    h2Cab.style.textDecorationColor = "rgba(3, 33, 55, 1)";
+    h2Cab.className = "col-md-12";
+    h2Cab.appendChild(document.createTextNode(tienda.nombre));
+    divCab.appendChild(h2Cab);
+
+    var infoTienda = document.createElement("p");
+    infoTienda.innerHTML = "Cif: "+tienda.cif;
+    IdMainCont.appendChild(infoTienda);
+
+    var infoTienda1 = document.createElement("p");
+    infoTienda1.innerHTML = "Direccion: "+tienda.direccion;
+    IdMainCont.appendChild(infoTienda1);
+
+    var infoTienda2 = document.createElement("p");
+    infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
+    IdMainCont.appendChild(infoTienda2);
+
+    //Detalles de los productos
+
+    var divProductos = document.createElement("div");
+    divProductos.setAttribute("id","items");
+    divProductos.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
+    divProductos.style.borderTop = "2px solid rgba(3, 33, 55, 1)";
+    divProductos.style.margin = "10px 0px";
+    divProductos.style.padding = "5px 0px";
+    IdMainCont.appendChild(divProductos);
+
+    var stockShop = tienda.categoriesIte(IdCategory);
+    var item = stockShop.next();
+    while(!item.done){
+      var NomPro = document.createElement("h3");
+      NomPro.style.textDecoration = "underline";
+      NomPro.style.textDecorationColor = "rgba(3, 33, 55, 1)";
+      NomPro.appendChild(document.createTextNode(item.value.producto.nombre));
+      divProductos.appendChild(NomPro);
+
+      var detPro = document.createElement("div");
+      detPro.className = "row";
+      detPro.borderBottom = "1px solid rgba(3, 33, 55, 1)";
+      divProductos.appendChild(detPro);
+
+      var divImg = document.createElement("div");
+      detPro.appendChild(divImg);
+      divImg.className = "col-sm-6 text-center";
+
+      var imgPro = document.createElement("img");
+      imgPro.setAttribute("src",item.value.producto.imagenes);
+      imgPro.style.width = "50%";
+      imgPro.style.height = "auto";
+      imgPro.style.padding = "8px";
+      imgPro.style.borderBottomLeftRadius = "32px";
+      imgPro.style.borderTopRightRadius = "32px";
+      divImg.appendChild(imgPro);
+
+      var divInfo = document.createElement("div");
+      detPro.appendChild(divInfo);
+      divInfo.className = "col-sm-6";
+      divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
+     // console.log( imgPro.offsetHeight + "px");
+
+
+      var InfoProducto = document.createElement("p");
+      InfoProducto.innerHTML = "<b>Nombre: </b>" + item.value.producto.nombre;
+      divInfo.appendChild(InfoProducto);
+
+      var InfoProducto1 = document.createElement("p");
+      InfoProducto1.innerHTML = "<b>Marca: </b>" + item.value.producto.marca;
+      divInfo.appendChild(InfoProducto1);
+
+      var InfoProducto4 = document.createElement("p");
+      InfoProducto4.innerHTML = "<b>En Stock: </b>" + item.value.cantidad + " Unidades";
+      divInfo.appendChild(InfoProducto4);
+
+      var InfoProducto2 = document.createElement("p");
+      InfoProducto2.innerHTML = "<b>Precio + I.V.A: </b>" + item.value.producto.precioConIVA + " €";
+      divInfo.appendChild(InfoProducto2);
+
+      var InfoProducto3 = document.createElement("p");
+      InfoProducto3.innerHTML = "<b>I.V.A (%): </b>" + item.value.producto.IVA + " %";
+      divInfo.appendChild(InfoProducto3);
+
+      var BtnDetalleProducto = document.createElement("button");
+      BtnDetalleProducto.className = "btn btn-default";
+      BtnDetalleProducto.appendChild(document.createTextNode("Detalles del producto"));
+      BtnDetalleProducto.style.marginRight = "5px";
+      divInfo.appendChild(BtnDetalleProducto);
+      BtnDetalleProducto.addEventListener("click",productShopPopulate(tienda,item.value.producto.IdProduct));
+
+      var BtnVerProducto = document.createElement("button");
+      BtnVerProducto.className = "btn btn-success";
+      BtnVerProducto.appendChild(document.createTextNode("Ver Producto"));
+      divInfo.appendChild(BtnVerProducto);
+
+
+      item = stockShop.next();
+    }
+
+    var divAtras = document.createElement("div");
+    divAtras.className = "row text-center";
+    IdMainCont.appendChild(divAtras);
+
+    var BtnAtras = document.createElement("button");
+    BtnAtras.className = "btn btn-success";
+
+    var iconGalon = document.createElement("span");
+    iconGalon.className = "glyphicon glyphicon-chevron-left";
+    BtnAtras.appendChild(iconGalon);
+    BtnAtras.appendChild(document.createTextNode("Atras"));
+    IdMainCont.appendChild(BtnAtras);
+
+
+    BtnAtras.addEventListener("click",initPopulate);
+  }
+}
+
 
 function clearMainCont()
 /*Funcion para limpiar el contenido de la division con id main-cont */

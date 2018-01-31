@@ -38,21 +38,23 @@ nav{
   background-color: rgba( 72,110,136,1);
 }
 .nav-pills>li>a{
-  color: white;
+  color: rgb(85, 116, 184);
   border-radius: 0px;
+  font-weight: bold;
 }
 .nav-pills>li>a:hover{
-  color: rgba( 72,110,136,1);
+  color: rgb(139, 166, 224);
+}
+.nav-pills>li>a:action{
+  color: black;
 }
 
 /*estilos para el contenedor principal y sus elementos*/
-main{
-  min-height: calc(100vh - 200px);
-}
+
 
 #main-cont{
   background-color: rgb(192, 220, 240);
-  min-height: calc(100vh - 174px);
+  min-height: calc(100vh - 305px);
 }
 #contRemove{
   background-color: rgb(192, 220, 240);
@@ -62,4 +64,13 @@ main{
 footer{
   text-align: center;
   border-top: 4px solid rgba( 72,110,136,1);
+}
+.list-group{
+  width: 50%;
+  margin: 10px auto;
+}
+.list-group-item:hover{
+  cursor: pointer;
+  background-color: rgba(  3, 33, 55,1);
+  color: white;
 }
