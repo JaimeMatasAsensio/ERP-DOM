@@ -26,7 +26,7 @@ header{
   height: 100px;
 }
 #cabecera{
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 /*estilos para nav y sus elementos*/
@@ -55,6 +55,7 @@ nav{
 #main-cont{
   background-color: rgb(192, 220, 240);
   min-height: calc(100vh - 305px);
+  padding: 10px 0;
 }
 #contRemove{
   background-color: rgb(192, 220, 240);
@@ -65,10 +66,11 @@ footer{
   text-align: center;
   border-top: 4px solid rgba( 72,110,136,1);
 }
-.list-group{
+#divTienda .list-group{
   width: 50%;
   margin: 10px auto;
 }
+ 
 .list-group-item:hover{
   cursor: pointer;
   background-color: rgba(  3, 33, 55,1);

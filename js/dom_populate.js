@@ -3,14 +3,15 @@
 init();
 var Store = StoreHouse.getInstance();
 var IdMainCont = document.getElementById("main-cont");
-var BtnRemoveChilds = document.getElementById("removeChilds");
-BtnRemoveChilds.addEventListener("click", clearMainCont);
-
+var divShopsMenu = document.getElementById("ShopsMenu");
+divShopsMenu.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
+divShopsMenu.style.borderTop = "2px solid rgba(3, 33, 55, 1)";
+divShopsMenu.appendChild(menuShopPopulate());
 function initPopulate()
 /*Funcion que inicializa la pagina cargando las tiendas que existen dentro del storehouse */
 {
   clearMainCont();
-
+  
   var divCab = document.createElement("div");
   divCab.setAttribute("id","cabecera");
   divCab.className = "row";
@@ -28,7 +29,7 @@ function initPopulate()
   divTiendas.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
   divTiendas.style.borderTop = "2px solid rgba(3, 33, 55, 1)";
   divTiendas.style.margin = "10px 0px";
-  divTiendas.style.padding = "5px 0px";
+  divTiendas.style.padding = "10px 0px";
 
   IdMainCont.appendChild(divTiendas);
 
@@ -37,6 +38,7 @@ function initPopulate()
   var index = 1;
   while(!shop.done){
     var divTienda = document.createElement("div");
+    divTienda.setAttribute("id","divTienda");
     divTienda.className = "col-sm-4 text-center";
     divTienda.style.minHeight = "200px";
     divTiendas.appendChild(divTienda);
@@ -55,7 +57,6 @@ function initPopulate()
 
     divTienda.appendChild(BtnVerTienda);
 
-    BtnVerTienda.addEventListener("click",clearMainCont);
     BtnVerTienda.addEventListener("click",shopPopulate(shop.value));
 
     index++;
@@ -64,12 +65,16 @@ function initPopulate()
 
 }
 
+
+
+
 function shopPopulate(shop)
 /*Funcion para mostrar los productos de una tienda una vez se ha seleccionado una tienda en concreto */
 {
   var tienda = shop;
   return function(){
     clearMainCont();
+
     var divCab = document.createElement("div");
     divCab.setAttribute("id","cabecera");
     divCab.className = "row";
@@ -140,7 +145,6 @@ function shopPopulate(shop)
       divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
      // console.log( imgPro.offsetHeight + "px");
 
-
       var InfoProducto = document.createElement("p");
       InfoProducto.innerHTML = "<b>Nombre: </b>" + item.value.producto.nombre;
       divInfo.appendChild(InfoProducto);
@@ -166,7 +170,14 @@ function shopPopulate(shop)
       BtnDetalleProducto.appendChild(document.createTextNode("Detalles del producto"));
       BtnDetalleProducto.style.marginRight = "5px";
       divInfo.appendChild(BtnDetalleProducto);
-      BtnDetalleProducto.addEventListener("click",productShopPopulate(tienda,item.value.producto.IdProduct));
+      BtnDetalleProducto.addEventListener("click",productShopPopulate(shop,item.value.producto.IdProduct));
+      
+      var BtnGlobalProducto = document.createElement("button");
+      BtnGlobalProducto.className = "btn btn-default";
+      BtnGlobalProducto.appendChild(document.createTextNode("Producto en todo el ERP"));
+      BtnGlobalProducto.style.marginRight = "5px";
+      divInfo.appendChild(BtnGlobalProducto);
+      BtnGlobalProducto.addEventListener("click",globalProductPopulate(item.value.producto.IdProduct));
 
       var BtnVerProducto = document.createElement("button");
       BtnVerProducto.className = "btn btn-success";
@@ -182,7 +193,7 @@ function shopPopulate(shop)
     IdMainCont.appendChild(divAtras);
 
     var BtnAtras = document.createElement("button");
-    BtnAtras.className = "btn btn-success";
+    BtnAtras.className = "btn btn-success btn-lg";
 
     var iconGalon = document.createElement("span");
     iconGalon.className = "glyphicon glyphicon-chevron-left";
@@ -195,6 +206,9 @@ function shopPopulate(shop)
   };
 
 }
+
+
+
 
 function productShopPopulate(shop,IdPro)
 /*Funcion que muestra los detalles de un producto en una tienda una vez se ha seleccionado el producto en dicha tienda*/
@@ -311,10 +325,11 @@ function productShopPopulate(shop,IdPro)
     IdMainCont.appendChild(divAtras);
 
     var BtnAtras = document.createElement("button");
-    BtnAtras.className = "btn btn-success";
+    BtnAtras.className = "btn btn-success btn-lg";
 
     var iconGalon = document.createElement("span");
     iconGalon.className = "glyphicon glyphicon-chevron-left";
+
     BtnAtras.appendChild(iconGalon);
     BtnAtras.appendChild(document.createTextNode("Atras"));
     IdMainCont.appendChild(BtnAtras);
@@ -324,6 +339,10 @@ function productShopPopulate(shop,IdPro)
   }
 
 }
+
+
+
+
 
 function menuCategoryShopPopulate(shop){
 
@@ -341,6 +360,10 @@ function menuCategoryShopPopulate(shop){
   }
   return menuCategory;
 }
+
+
+
+
 
 function productCategoryShopPopulate(shop,IdCategory)
 /*Funcion que muestra los productos de una tienda filtrados por categoria*/
@@ -419,7 +442,6 @@ function productCategoryShopPopulate(shop,IdCategory)
       divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
      // console.log( imgPro.offsetHeight + "px");
 
-
       var InfoProducto = document.createElement("p");
       InfoProducto.innerHTML = "<b>Nombre: </b>" + item.value.producto.nombre;
       divInfo.appendChild(InfoProducto);
@@ -447,6 +469,13 @@ function productCategoryShopPopulate(shop,IdCategory)
       divInfo.appendChild(BtnDetalleProducto);
       BtnDetalleProducto.addEventListener("click",productShopPopulate(tienda,item.value.producto.IdProduct));
 
+      var BtnGlobalProducto = document.createElement("button");
+      BtnGlobalProducto.className = "btn btn-default";
+      BtnGlobalProducto.appendChild(document.createTextNode("Producto en todo el ERP"));
+      BtnGlobalProducto.style.marginRight = "5px";
+      divInfo.appendChild(BtnGlobalProducto);
+      BtnGlobalProducto.addEventListener("click",globalProductPopulate(item.value.producto.IdProduct));
+
       var BtnVerProducto = document.createElement("button");
       BtnVerProducto.className = "btn btn-success";
       BtnVerProducto.appendChild(document.createTextNode("Ver Producto"));
@@ -465,6 +494,7 @@ function productCategoryShopPopulate(shop,IdCategory)
 
     var iconGalon = document.createElement("span");
     iconGalon.className = "glyphicon glyphicon-chevron-left";
+
     BtnAtras.appendChild(iconGalon);
     BtnAtras.appendChild(document.createTextNode("Atras"));
     IdMainCont.appendChild(BtnAtras);
@@ -474,6 +504,160 @@ function productCategoryShopPopulate(shop,IdCategory)
   }
 }
 
+function menuShopPopulate(){
+  var ulShops = document.createElement("ul");
+  ulShops.className = "list-group text-center";
+  ulShops.style.margin = "10px auto";
+  ulShops.style.width = "20%";
+
+  var liCabecera = document.createElement("li");
+  liCabecera.className = "list-group-item list-group-item-info active";
+  liCabecera.appendChild(document.createTextNode("TIENDAS"));
+  liCabecera.addEventListener("click",initPopulate);
+  ulShops.appendChild(liCabecera);
+
+  var shopsIte = Store.shopIte;
+  var shop = shopsIte.next();
+  while(!shop.done){
+    var liItem = document.createElement("li");
+    liItem.className = "list-group-item list-group-item-info";
+    liItem.appendChild(document.createTextNode(shop.value.nombre));
+    liItem.addEventListener("click",shopPopulate(shop.value));
+    ulShops.appendChild(liItem);
+    shop = shopsIte.next();
+  }
+  return ulShops;
+}
+
+
+function globalProductPopulate(IdProducto)
+/*Funcion que muestre el producto en todo el ERP */
+{
+  var IdProducto = IdProducto;
+  
+  return function(){
+    clearMainCont();
+    var item = Store.getGlobalProduct(IdProducto);
+    
+    var divProducto = document.createElement("div");
+    divProducto.setAttribute("id","items");
+    divProducto.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
+    divProducto.style.borderTop = "2px solid rgba(3, 33, 55, 1)";
+    divProducto.style.margin = "10px 0px";
+    divProducto.style.padding = "5px 0px";
+    IdMainCont.appendChild(divProducto);
+
+    var NomPro = document.createElement("h3");
+    NomPro.style.textDecoration = "underline";
+    NomPro.style.textDecorationColor = "rgba(3, 33, 55, 1)";
+    NomPro.appendChild(document.createTextNode(item.producto.nombre + " en Store House \"" + Store.nombre + "\""));
+    divProducto.appendChild(NomPro);
+
+    var detPro = document.createElement("div");
+    detPro.className = "row";
+    detPro.borderBottom = "1px solid rgba(3, 33, 55, 1)";
+    divProducto.appendChild(detPro);
+
+    var divImg = document.createElement("div");
+    detPro.appendChild(divImg);
+    divImg.className = "col-sm-6 text-center";
+
+    var imgPro = document.createElement("img");
+    imgPro.setAttribute("src",item.producto.imagenes);
+    imgPro.style.width = "100%";
+    imgPro.style.height = "auto";
+    imgPro.style.padding = "8px";
+    imgPro.style.borderBottomLeftRadius = "32px";
+    imgPro.style.borderTopRightRadius = "32px";
+    divImg.appendChild(imgPro);
+
+    var divInfo = document.createElement("div");
+    detPro.appendChild(divInfo);
+    divInfo.className = "col-sm-6";
+    divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
+
+    var InfoProducto = document.createElement("p");
+    InfoProducto.innerHTML = "<b>Nombre: </b>" + item.producto.nombre;
+    divInfo.appendChild(InfoProducto);
+
+    var InfoProducto1 = document.createElement("p");
+    InfoProducto1.innerHTML = "<b>Marca: </b>" + item.producto.marca;
+    divInfo.appendChild(InfoProducto1);
+
+    var InfoProducto2 = document.createElement("p");
+    InfoProducto2.innerHTML = "<b>En Stock: </b>" + item.cantidad + " Unidades";
+    divInfo.appendChild(InfoProducto2);
+
+    var InfoProducto3 = document.createElement("p");
+    InfoProducto3.innerHTML = "<b>Precio + I.V.A: </b>" + item.producto.precioConIVA + " €";
+    divInfo.appendChild(InfoProducto3);
+
+    var InfoProducto4 = document.createElement("p");
+    InfoProducto4.innerHTML = "<b>I.V.A (%): </b>" + item.producto.IVA + " %";
+    divInfo.appendChild(InfoProducto4);
+
+    var InfoProducto5 = document.createElement("p");
+    InfoProducto5.innerHTML = "<b>Descripcion: </b>" + item.producto.descripcion ;
+    divInfo.appendChild(InfoProducto5);
+
+    if(item.producto instanceof Movil){
+      var InfoProducto6 = document.createElement("p");
+      InfoProducto6.innerHTML = "<b>Camara: </b>" + item.producto.camara ;
+      divInfo.appendChild(InfoProducto6);
+
+      var InfoProducto7 = document.createElement("p");
+      InfoProducto7.innerHTML = "<b>Memoria: </b>" + item.producto.memoria ;
+      divInfo.appendChild(InfoProducto7);
+    }
+
+    if(item.producto instanceof Ordenador){
+      var InfoProducto6 = document.createElement("p");
+      InfoProducto6.innerHTML = "<b>CPU: </b>" + item.producto.cpu ;
+      divInfo.appendChild(InfoProducto6);
+
+      var InfoProducto7 = document.createElement("p");
+      InfoProducto7.innerHTML = "<b>Memoria: </b>" + item.producto.memoria ;
+      divInfo.appendChild(InfoProducto7);
+    }
+
+    if(item.producto instanceof VideoConsola){
+      var InfoProducto6 = document.createElement("p");
+      InfoProducto6.innerHTML = "<b>Numero de Jugadores: </b>" + item.producto.numJugadores ;
+      divInfo.appendChild(InfoProducto6);
+
+      var InfoProducto7 = document.createElement("p");
+      InfoProducto7.innerHTML = "<b>Portatil: </b>" + item.producto.portatil ;
+      divInfo.appendChild(InfoProducto7);
+    }
+
+    if(item.producto instanceof Camara){
+      var InfoProducto6 = document.createElement("p");
+      InfoProducto6.innerHTML = "<b>Lente: </b>" + item.producto.lente ;
+      divInfo.appendChild(InfoProducto6);
+
+      var InfoProducto7 = document.createElement("p");
+      InfoProducto7.innerHTML = "<b>Memoria: </b>" + item.producto.memoria ;
+      divInfo.appendChild(InfoProducto7);
+    }
+    
+    
+    var divAtras = document.createElement("div");
+    divAtras.className = "row text-center";
+    IdMainCont.appendChild(divAtras);
+
+    var BtnAtras = document.createElement("button");
+    BtnAtras.className = "btn btn-success";
+
+    var iconGalon = document.createElement("span");
+    iconGalon.className = "glyphicon glyphicon-chevron-left";
+    
+    BtnAtras.appendChild(iconGalon);
+    BtnAtras.appendChild(document.createTextNode("Atras"));
+    IdMainCont.appendChild(BtnAtras);
+
+    BtnAtras.addEventListener("click",initPopulate);
+  }
+}
 
 function clearMainCont()
 /*Funcion para limpiar el contenido de la division con id main-cont */

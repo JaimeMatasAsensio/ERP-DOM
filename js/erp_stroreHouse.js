@@ -441,6 +441,37 @@ var StoreHouse = (function(){
         }
       }
 
+      this.getGlobalProduct = function(productId)
+      /*Metodo para obtener el total de un producto en todo el ERP, devuelve un objeto literal*/
+      { 
+        var globalProduct = null;
+
+        _shops.forEach(function(element) {
+          var IteStock = element.stockIte;
+          var item = IteStock.next();
+          while(!item.done){
+            if(item.value.producto.IdProduct === productId){
+              console.log("Producto Encontrado!");
+              if(globalProduct){
+                console.log("Añadiendo cantidad...");
+                globalProduct.cantidad += item.value.cantidad;
+              }else{
+                console.log("Primera vez!");
+                  globalProduct = {
+                  producto: item.value.producto,
+                  cantidad: item.value.cantidad,
+                  categoriaId: item.value.categoriaId,
+                };
+              }
+            }
+            item = IteStock.next();
+          }
+        });
+
+        return globalProduct;
+
+      }
+
     }
     StoreHouse.prototype = {};
     StoreHouse.prototype.constructor = StoreHouse;
