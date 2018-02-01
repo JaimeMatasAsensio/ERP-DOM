@@ -1,5 +1,10 @@
 "use strict";
-function init(){
+
+
+
+function init()
+/*Funcion que inicaliza todo el ERP, las tiendas que lo componen asi como los productos y las categorias*/
+{
   //Implementacion de los Objetos Categoria
   var cat1 = new Category("Comunicacion","Telefonos moviles, Fijos, radios de onda corta, radios de onda larga y todo tipo de equipos relacionados con la comunicacion.");
   var cat2 = new Category("Imagen","Equipos fotograficos, grabacion de Video y todo tipo de equipos relacionados con la Imagen.");

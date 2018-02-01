@@ -1,5 +1,6 @@
 "use strict";
-/*Documento para implementar los objetos shop*/
+/* Documento para implementar los objetos shop */
+
 
 //Bloque de errores para shop
 
@@ -323,7 +324,7 @@ function Shop(cif,nombre,direccion,telefono,coords)
 
    }
     this.getProduct = function(proId)
-    /*Metodo para remover un producto, requiere la Id del producto*/
+    /*Metodo para Obtener un producto, requiere la Id del producto*/
     {
       var indexPro = _stock.findIndex(function(element){
         return (element.producto.IdProduct === proId);

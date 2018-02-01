@@ -8,8 +8,6 @@ Colores para la pagina:
 .rgba-primary-3 { color: rgba( 18, 55, 82,1) }
 .rgba-primary-4 { color: rgba(  3, 33, 55,1) }
 
-
-
 /*estilos compartidos*/
 header,footer,nav{
   background-color: rgba( 41, 81,109,1);
@@ -50,8 +48,6 @@ nav{
 }
 
 /*estilos para el contenedor principal y sus elementos*/
-
-
 #main-cont{
   background-color: rgb(192, 220, 240);
   min-height: calc(100vh - 305px);
@@ -70,7 +66,7 @@ footer{
   width: 50%;
   margin: 10px auto;
 }
- 
+
 .list-group-item:hover{
   cursor: pointer;
   background-color: rgba(  3, 33, 55,1);

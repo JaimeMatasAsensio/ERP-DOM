@@ -1,5 +1,5 @@
 "use strict";
-/*Documento para implementar los objetos Category */
+/*Documento para implementar los objetos Category*/
 
 //Bloque de Errores Para los objetos Category
 

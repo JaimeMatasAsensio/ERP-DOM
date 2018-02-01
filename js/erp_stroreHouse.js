@@ -1,5 +1,6 @@
 "use strict";
-/*Documento para implemetar el objecto storehose */
+/* Documento para implemetar el objecto storehose */
+
 
 //Bloque de errores para storeHouse
 
@@ -443,7 +444,7 @@ var StoreHouse = (function(){
 
       this.getGlobalProduct = function(productId)
       /*Metodo para obtener el total de un producto en todo el ERP, devuelve un objeto literal*/
-      { 
+      {
         var globalProduct = null;
 
         _shops.forEach(function(element) {

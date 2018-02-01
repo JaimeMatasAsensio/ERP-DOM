@@ -1,5 +1,6 @@
 "use strict";
-/*Documento para implemetar el objecto product y los objectos que heredaran de el*/
+/*Documento para implemetar el objecto product y los objectos que heredaran del del objeto Producto*/
+
 
 //--- Bloque de Errores para objetos Product
 
@@ -302,7 +303,7 @@ InvalidValueForIVA.prototype.toString = function(){
         _portatil = newportatil;
       }
     });
-    
+
     //Metodos Publicos.. No tiene por ahora
   }
   VideoConsola.prototype = Object.create(Product.prototype);

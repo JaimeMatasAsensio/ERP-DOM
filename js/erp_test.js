@@ -1,5 +1,5 @@
 "use strict";
-/**Documento para realizar distintas pruebas */
+/**Documento para realizar distintas pruebas Sobre los objetos, y patrones de diseño que componen la practica 4*/
 console.log("--- Test de Objetos ---");
 
 console.log("");

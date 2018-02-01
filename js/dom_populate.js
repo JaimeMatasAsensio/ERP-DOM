@@ -1,17 +1,21 @@
 "use strict";
 /*Documento para crear las distintas funciones que cargaran datos desde Store */
 init();
+
 var Store = StoreHouse.getInstance();
 var IdMainCont = document.getElementById("main-cont");
 var divShopsMenu = document.getElementById("ShopsMenu");
 divShopsMenu.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
 divShopsMenu.style.borderTop = "2px solid rgba(3, 33, 55, 1)";
 divShopsMenu.appendChild(menuShopPopulate());
+
+
+
 function initPopulate()
 /*Funcion que inicializa la pagina cargando las tiendas que existen dentro del storehouse */
 {
   clearMainCont();
-  
+
   var divCab = document.createElement("div");
   divCab.setAttribute("id","cabecera");
   divCab.className = "row";
@@ -80,8 +84,6 @@ function shopPopulate(shop)
     divCab.className = "row";
     IdMainCont.appendChild(divCab);
 
-    //Detalles de la tienda
-
     var h2Cab = document.createElement("h2");
     h2Cab.setAttribute("id","titleStore");
     h2Cab.style.textDecoration = "underline";
@@ -102,7 +104,7 @@ function shopPopulate(shop)
     infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
     IdMainCont.appendChild(infoTienda2);
 
-    //Detalles de los productos
+
 
     var divProductos = document.createElement("div");
     divProductos.setAttribute("id","items");
@@ -143,7 +145,6 @@ function shopPopulate(shop)
       detPro.appendChild(divInfo);
       divInfo.className = "col-sm-6";
       divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
-     // console.log( imgPro.offsetHeight + "px");
 
       var InfoProducto = document.createElement("p");
       InfoProducto.innerHTML = "<b>Nombre: </b>" + item.value.producto.nombre;
@@ -171,7 +172,7 @@ function shopPopulate(shop)
       BtnDetalleProducto.style.marginRight = "5px";
       divInfo.appendChild(BtnDetalleProducto);
       BtnDetalleProducto.addEventListener("click",productShopPopulate(shop,item.value.producto.IdProduct));
-      
+
       var BtnGlobalProducto = document.createElement("button");
       BtnGlobalProducto.className = "btn btn-default";
       BtnGlobalProducto.appendChild(document.createTextNode("Producto en todo el ERP"));
@@ -183,7 +184,6 @@ function shopPopulate(shop)
       BtnVerProducto.className = "btn btn-success";
       BtnVerProducto.appendChild(document.createTextNode("Ver Producto"));
       divInfo.appendChild(BtnVerProducto);
-
 
       item = stockShop.next();
     }
@@ -217,7 +217,32 @@ function productShopPopulate(shop,IdPro)
   var item = tienda.getProduct(IdPro);
   return function(){
     clearMainCont();
-    //console.log(item.producto.toString());
+
+    var divCab = document.createElement("div");
+    divCab.setAttribute("id","cabecera");
+    divCab.className = "row";
+    IdMainCont.appendChild(divCab);
+
+    var h2Cab = document.createElement("h2");
+    h2Cab.setAttribute("id","titleStore");
+    h2Cab.style.textDecoration = "underline";
+    h2Cab.style.textDecorationColor = "rgba(3, 33, 55, 1)";
+    h2Cab.className = "col-md-12";
+    h2Cab.appendChild(document.createTextNode(tienda.nombre));
+    divCab.appendChild(h2Cab);
+
+    var infoTienda = document.createElement("p");
+    infoTienda.innerHTML = "Cif: "+tienda.cif;
+    IdMainCont.appendChild(infoTienda);
+
+    var infoTienda1 = document.createElement("p");
+    infoTienda1.innerHTML = "Direccion: "+tienda.direccion;
+    IdMainCont.appendChild(infoTienda1);
+
+    var infoTienda2 = document.createElement("p");
+    infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
+    IdMainCont.appendChild(infoTienda2);
+
     var divProducto = document.createElement("div");
     divProducto.setAttribute("id","items");
     divProducto.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
@@ -344,7 +369,9 @@ function productShopPopulate(shop,IdPro)
 
 
 
-function menuCategoryShopPopulate(shop){
+function menuCategoryShopPopulate(shop)
+/*Funcion que muestra un menu de categorias de cada tienda */
+{
 
   var menuCategory = document.createElement("ul");
   menuCategory.className = "list-group text-center";
@@ -377,8 +404,6 @@ function productCategoryShopPopulate(shop,IdCategory)
     divCab.className = "row";
     IdMainCont.appendChild(divCab);
 
-    //Detalles de la tienda
-
     var h2Cab = document.createElement("h2");
     h2Cab.setAttribute("id","titleStore");
     h2Cab.style.textDecoration = "underline";
@@ -398,8 +423,6 @@ function productCategoryShopPopulate(shop,IdCategory)
     var infoTienda2 = document.createElement("p");
     infoTienda2.innerHTML = "Telefono: "+tienda.telefono;
     IdMainCont.appendChild(infoTienda2);
-
-    //Detalles de los productos
 
     var divProductos = document.createElement("div");
     divProductos.setAttribute("id","items");
@@ -440,7 +463,6 @@ function productCategoryShopPopulate(shop,IdCategory)
       detPro.appendChild(divInfo);
       divInfo.className = "col-sm-6";
       divInfo.style.borderLeft = "2px solid rgba(3, 33, 55, 1)";
-     // console.log( imgPro.offsetHeight + "px");
 
       var InfoProducto = document.createElement("p");
       InfoProducto.innerHTML = "<b>Nombre: </b>" + item.value.producto.nombre;
@@ -531,14 +553,27 @@ function menuShopPopulate(){
 
 
 function globalProductPopulate(IdProducto)
-/*Funcion que muestre el producto en todo el ERP */
+/*Funcion que muestra un producto seleccionado en todo el ERP */
 {
   var IdProducto = IdProducto;
-  
+
   return function(){
     clearMainCont();
     var item = Store.getGlobalProduct(IdProducto);
-    
+
+    var divCab = document.createElement("div");
+    divCab.setAttribute("id","cabecera");
+    divCab.className = "row";
+    IdMainCont.appendChild(divCab);
+
+    var h2Cab = document.createElement("h2");
+    h2Cab.setAttribute("id","titleStore");
+    h2Cab.style.textDecoration = "underline";
+    h2Cab.style.textDecorationColor = "rgba(3, 33, 55, 1)";
+    h2Cab.className = "col-md-12";
+    h2Cab.appendChild(document.createTextNode(item.producto.nombre + " en el Store House " + Store.nombre));
+    divCab.appendChild(h2Cab);
+
     var divProducto = document.createElement("div");
     divProducto.setAttribute("id","items");
     divProducto.style.borderBottom = "2px solid rgba(3, 33, 55, 1)";
@@ -639,8 +674,8 @@ function globalProductPopulate(IdProducto)
       InfoProducto7.innerHTML = "<b>Memoria: </b>" + item.producto.memoria ;
       divInfo.appendChild(InfoProducto7);
     }
-    
-    
+
+
     var divAtras = document.createElement("div");
     divAtras.className = "row text-center";
     IdMainCont.appendChild(divAtras);
@@ -650,7 +685,7 @@ function globalProductPopulate(IdProducto)
 
     var iconGalon = document.createElement("span");
     iconGalon.className = "glyphicon glyphicon-chevron-left";
-    
+
     BtnAtras.appendChild(iconGalon);
     BtnAtras.appendChild(document.createTextNode("Atras"));
     IdMainCont.appendChild(BtnAtras);
@@ -663,7 +698,6 @@ function clearMainCont()
 /*Funcion para limpiar el contenido de la division con id main-cont */
 {
   var allChilds = IdMainCont.children;
-  //console.log("Hijos del contenido inicial: " + allChilds.length)
   while(allChilds.length > 0) {
     IdMainCont.removeChild(allChilds[0]);
   }
@@ -671,27 +705,3 @@ function clearMainCont()
 
 initPopulate();
 
-
-
-/*
-<div id="cabecera" class="row">
-  <h2 id="titleStore">StoreMancha</h2>
-</div>
-<div id="tiendas"class="row">
-  <div class="col-sm-4 text-center">
-    <h3 id="titleShop1">Tienda1</h3>
-    <ul>
-      <li>tienda1.Categoria1</li>
-    </ul>
-    <button class="btn btn-success" id="showShop1">Ver Tienda</button>
-  </div>
-  <div class="col-sm-4 text-center">
-    <h3 id="titleShop2">Tienda3</h3>
-    <button class="btn btn-success" id="showShop2">Ver Tienda</button>
-  </div>
-  <div class="col-sm-4 text-center">
-    <h3 id="titleShop3">Tienda3</h3>
-    <button class="btn btn-success" id="showShop3"><span class="glyphicon glyphicon-chevron-left"></span> Ver Tienda</button>
-  </div>
-</div>
-*/
