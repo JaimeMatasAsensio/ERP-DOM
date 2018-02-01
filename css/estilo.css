@@ -40,10 +40,11 @@ nav{
   border-radius: 0px;
   font-weight: bold;
 }
-.nav-pills>li>a:hover{
+.nav-pills>li:hover{
   color: rgb(139, 166, 224);
+  cursor: pointer;
 }
-.nav-pills>li>a:action{
+.nav-pills>li:action{
   color: black;
 }
 
