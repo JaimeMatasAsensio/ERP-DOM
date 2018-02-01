@@ -1,6 +1,11 @@
 # ERP-DOM
 ## DWEC | Tema5 | Practica 5: ERP con DOM  
   
+## Version 0.0.3  
+Creacion del menu desplegable con JS  
+Eliminacion de los Estilos dados con JS  
+Creacion de los estilos con CSS  
+  
 ## Version 0.0.2  
 Creacion de las distintas funciones Populate para mostrar los contenidos del StoreHouse  
 Creacion de algunas funciones en las siguienes clases:  

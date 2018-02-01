@@ -22,15 +22,15 @@ header{
 #logo{
   width: 140px;
   height: 100px;
+  vertical-align: middle;
 }
-#cabecera{
+#cabeceraPractica{
   margin-top: 10px;
 }
 
 /*estilos para nav y sus elementos*/
 nav{
   border-bottom: 4px solid rgba( 72,110,136,1);
-  padding: 5px 0;
 }
 #inicio{
   background-color: rgba( 72,110,136,1);
@@ -48,16 +48,86 @@ nav{
   color: black;
 }
 
+.drop-cont{
+  position:absolute;
+  z-index: 1;
+  width: 200px;
+  height: 0px;
+  background-color: rgba( 72,110,136,1);
+}
+
+.drop-cont a {
+  display: none;
+  color: black;
+  font-weight: bold;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-align: left;
+}
+.drop-cont a:hover{
+  cursor: pointer;
+  background-color: rgba(3, 33, 55,1);
+  color: white;
+}
+
 /*estilos para el contenedor principal y sus elementos*/
 #main-cont{
   background-color: rgb(192, 220, 240);
   min-height: calc(100vh - 305px);
   padding: 10px 0;
 }
-#contRemove{
-  background-color: rgb(192, 220, 240);
-  height: 50px
+
+#ShopsMenu,#tiendas,#items{
+  border-bottom: 2px solid rgba(3, 33, 55, 1);
+  border-top: 2px solid rgba(3, 33, 55, 1);
 }
+#items{
+  border-top:none;
+}
+#tiendas,#items{
+  margin:10px 0px;
+  padding:10px 0px;
+}
+
+#divTienda{
+  min-height: 200px;
+}
+
+#titleStore,.cabProd{
+  text-decoration: underline;
+  text-decoration-color: rgba(3, 33, 55, 1); 
+}
+
+.detProd{
+  border-bottom: 2px solid rgba(3, 33, 55, 1);
+  margin-bottom: 10px;
+  min-height: 300px;
+}
+
+.imgPro,.imgProDet{
+  width: 250px;
+  height: auto;
+  padding: 8px;
+  border-bottom-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+.imgProDet{
+  width: 100%;
+}
+
+.infoPro{
+  border-left: 2px solid rgba(3, 33, 55, 1);
+}
+
+.btn-default{
+  margin-right: 5px;
+}
+
+.infoTienda{
+  margin-left: 5px;
+}
+
 /*estilos para el footer y sus elementos*/
 footer{
   text-align: center;
